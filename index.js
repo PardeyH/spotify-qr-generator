@@ -14,6 +14,10 @@ function removeSpecialChars(str) {
   return str.replace(/[^a-zA-Z0-9&\s]/g, "");
 }
 
+function showReleaseYear(str) {
+  return str.slice(0, 4); 
+}
+
 const getToken = async () => {
     try {
       const url = 'https://accounts.spotify.com/api/token';
@@ -80,7 +84,7 @@ const getToken = async () => {
       for (const song of playlistData) {
         const artist = removeSpecialChars(song.track.artists[0].name);
         const title = removeSpecialChars(song.track.name);
-        const releaseYear = removeSpecialChars(song.track.album.release_date);
+        const releaseYear = showReleaseYear(song.track.album.release_date);
         const spotifyURL = song.track.uri;
 
 
