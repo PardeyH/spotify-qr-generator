@@ -1,13 +1,9 @@
 import image from 'qr-image';
 import { writeFile } from 'fs';
 import axios from 'axios';
-import env from 'dotenv/config';
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-
-console.log(clientId);
-console.log(clientSecret);
 
 // removes all special characters except the ampersand 
 function removeSpecialChars(str) {
@@ -41,11 +37,6 @@ const getToken = async () => {
       throw error; 
     }
   };
-
-  (async () => {
-    const token = await getToken();
-    console.log('Access Token:', token.access_token);
-  })();
 
   async function getPlaylist(playlistId) {
     try {
@@ -86,7 +77,6 @@ const getToken = async () => {
         const title = removeSpecialChars(song.track.name);
         const releaseYear = showReleaseYear(song.track.album.release_date);
         const spotifyURL = song.track.uri;
-
 
         const songInfo = `Artist: ${artist}\nTitle: ${title}\nRelease Year: ${releaseYear}`;
   
